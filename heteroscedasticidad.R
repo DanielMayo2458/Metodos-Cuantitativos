@@ -1,11 +1,11 @@
 rm(list=ls())
 
-# Heteroscedasticidad (Checar parte te髍ica)
-# Generaci髇 de la base de datos heterosced醩tica
+# Heteroscedasticidad (Checar parte te贸rica)
+# Generaci贸n de la base de datos heterosced谩stica
 set.seed(1234)
 x1 <- rep(1:250,2)
 
-# Ojo, los errores estan en funci髇 de la variable x1, crecen
+# Ojo, los errores estan en funci贸n de la variable x1, crecen
 # de manera exponencial
 sigma2 <- x1^2.5
 epsilon <- rnorm(x1, 0, sqrt(sigma2))
@@ -13,7 +13,7 @@ epsilon <- rnorm(x1, 0, sqrt(sigma2))
 # Generamos los datos
 y = 5 + 13*x1 + epsilon
 
-# El investigador realiza la regresi髇, y capturamos los errores
+# El investigador realiza la regresi贸n, y capturamos los errores
 reg1 <- lm(y~x1)
 summary(reg1)
 e <- residuals(reg1)
@@ -21,7 +21,7 @@ e <- residuals(reg1)
 # Grafica 1, (y vs x1)
 # Grafica 2, Q-Q plot de los residuales
 # Grafica 3, Residuales vs y estimada
-# Grafica 4, versi髇 estandarizada de 3
+# Grafica 4, versi贸n estandarizada de 3
 windows()
 layout(matrix(1:4, nrow=2))
 plot(x1,y)
@@ -33,16 +33,19 @@ plot(reg1, which=3)
 
 # como identificar heteroscedasticidad
 # Breusch-Pagan test
-# Hip髏esis nula: Homosced醩tica
+# Hip贸tesis nula: Homosced谩stica
 
 library(lmtest)
 bptest(reg1)
 
-# Rechazado, es heterosced醩tica
+# Rechazado, es heterosced谩stica
 
 # Como corregir?
 library(sandwich)
 coeftest(reg1, vcov = vcovHC(reg1, type = "HC0"))
+
+#Esta es s贸lo la tarea de m茅todos cuantitativos
+
 
 
 
